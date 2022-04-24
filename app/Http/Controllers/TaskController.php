@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
+use App\Http\Requests\PutRequest;
 use App\Models\task;
 use Illuminate\Http\Request;
 
@@ -15,6 +17,10 @@ class TaskController extends Controller
     public function index()
     {
         //
+        return response()->json([
+            'message' => 'success',
+            'data' => task::all()
+        ]);
     }
 
     /**
@@ -33,9 +39,14 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         //
+        Task::create($request->all());
+        return response()->json([
+            'message' => 'success',
+            'data' => 'Created successfully'
+        ]);
     }
 
     /**
@@ -47,6 +58,10 @@ class TaskController extends Controller
     public function show(task $task)
     {
         //
+        return response()->json([
+            'message' => 'success',
+            'data' => $task
+        ]);
     }
 
     /**
@@ -67,9 +82,14 @@ class TaskController extends Controller
      * @param  \App\Models\task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, task $task)
+    public function update(PutRequest $request, task $task)
     {
         //
+        $task->update($request->all());
+        return response()->json([
+            'message' => 'success',
+            'data' => 'Updated successfully'
+        ]);
     }
 
     /**
@@ -81,5 +101,10 @@ class TaskController extends Controller
     public function destroy(task $task)
     {
         //
+        $task->delete();
+        return response()->json([
+            'message' => 'success',
+            'data' => 'Deleting task with id: '.$task->id
+        ]);
     }
 }
