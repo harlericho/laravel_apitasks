@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\PutRequest;
-use App\Models\task;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
